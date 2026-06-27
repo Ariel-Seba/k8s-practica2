@@ -1,0 +1,20 @@
+replicaCount: 2
+
+ingress:
+  host: prod.app.local
+
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "200m"
+  limits:
+    memory: "256Mi"
+    cpu: "500m"
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: chart
+        topologyKey: kubernetes.io/hostname
